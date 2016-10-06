@@ -1,0 +1,119 @@
+
+
+/**
+ * Palette: Material colors
+ * https://material.google.com/style/color.html
+ *
+ */
+
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #ECEFF1; /** blue grey 50 */
+  font-family: helvetica, Arial, sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+
+div.a, div.b, div.c, div.d {
+  color: #ffffff;
+  padding: 20px;
+}
+
+div.height {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+div.height > div {
+  display: table-row;
+}
+div.height > div.c {
+  height: 100%;
+}
+
+div.ab-container {
+  margin: 20px auto;
+  width: 820px;
+}
+
+div.a {
+  background-color: #009688; /* teal 500 */
+  width: 500px;
+  overflow: hidden;
+}
+
+div.b {
+  background-color: #2196F3; /** blue 500 */
+  float: right;
+  width: 300px;
+}
+
+div.c {
+  background-color: #0D47A1; /* blue 900 */
+  height: 100%;
+}
+
+/**
+ * negative margin tricks ftw
+ * push container right by the gutter width;
+ * push row backward that amount of margin;
+ * the extra padding from the last element is gone! :D
+ */
+div.d-grid {
+  margin-left: 20px;
+  width: 100%;
+}
+div.d-row {
+  margin-left: -20px;
+  overflow: hidden;
+  clear: both;
+}
+div.d-col {
+  width: 50%;
+  box-sizing: border-box;
+  padding-right: 20px;
+  float: left;
+  margin-top: 20px;
+}
+div.d {
+  background-color: #004D40; /* teal 900 */
+}
+
+
+@media only screen and (max-width: 840px) {
+  div.b {
+    float: none;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  div.a {
+    width: 100%;
+    padding: 10px;
+  }
+  div.ab-container {
+    padding: 10px;
+    margin: 0;
+    width: 100%;
+  }
+  div.d-grid {
+    margin-left: 10px;
+  }
+  div.d-row {
+    margin-left: -10px;
+  }
+  div.d-col {
+    margin-top: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  div.d-col {
+    width: 100%;
+  }
+}
+
