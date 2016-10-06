@@ -4,8 +4,16 @@
  * Palette: Material colors
  * https://material.google.com/style/color.html
  *
+ * I originally got the grid from here -
+ * http://csswizardry.com/2011/08/building-better-grid-systems/
+ * highly recommend over flexbox tricks, especially for ie
  */
 
+
+* {
+  /* all border box all the time :D */
+  box-sizing: border-box;
+}
 html, body {
   width: 100%;
   height: 100%;
@@ -14,14 +22,7 @@ html, body {
   background-color: #ECEFF1; /** blue grey 50 */
   font-family: helvetica, Arial, sans-serif;
 }
-* {
-  box-sizing: border-box;
-}
 
-div.a, div.b, div.c, div.d {
-  color: #ffffff;
-  padding: 20px;
-}
 
 div.height {
   display: table;
@@ -35,27 +36,33 @@ div.height > div.c {
   height: 100%;
 }
 
+
+/** centers + contains a+b */
 div.ab-container {
   margin: 20px auto;
   width: 820px;
 }
 
+
+div.a, div.b, div.c, div.d {
+  color: #ffffff;
+  padding: 20px;
+}
 div.a {
   background-color: #009688; /* teal 500 */
   width: 500px;
   overflow: hidden;
 }
-
 div.b {
   background-color: #2196F3; /** blue 500 */
   float: right;
   width: 300px;
 }
-
 div.c {
   background-color: #0D47A1; /* blue 900 */
   height: 100%;
 }
+
 
 /**
  * negative margin tricks ftw
@@ -84,6 +91,7 @@ div.d {
 }
 
 
+/** large breakpoint - gutters to 10px, full-width a+b */
 @media only screen and (max-width: 840px) {
   div.b {
     float: none;
@@ -111,6 +119,8 @@ div.d {
   }
 }
 
+
+/** small breakpoint - full-width d */
 @media only screen and (max-width: 450px) {
   div.d-col {
     width: 100%;
