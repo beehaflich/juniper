@@ -27,6 +27,7 @@ module.exports = {
 
     var query = client.query(query_statement, function(error, result) {
       if (error) {
+        console.log(error.toString());
         error_callback(error);
         return;
       }

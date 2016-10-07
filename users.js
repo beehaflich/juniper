@@ -40,11 +40,11 @@ module.exports = function(args, done) {
     done(error);
   });
 
-  // query for applications (+ listings)
+  // query for applications (+ listings, 1->1)
   var applicationQuery = (
     'select applications.*, listings.id listing_id, listings.name listing_name, listings.description listing_description ' +
     'from applications join listings on applications.listing_id = listings.id ' +
-    'where applications.user_id = $1'
+    'where applications.user_id = $1 limit 5'
   );
   database.query({
     'text': applicationQuery,
@@ -74,7 +74,7 @@ module.exports = function(args, done) {
   // query for created listings
   var listingQuery = (
     'select listings.id, listings.created_at, listings.name, listings.description ' +
-    'from listings where listings.created_by = $1'
+    'from listings where listings.created_by = $1 limit 5'
   );
   database.query({
     'text': listingQuery,
@@ -102,7 +102,7 @@ module.exports = function(args, done) {
   var companyQuery = (
     'select companies.*, teams.contact_user ' +
     'from teams join companies on teams.company_id = companies.id ' +
-    'where teams.user_id = $1'
+    'where teams.user_id = $1 limit 5'
   );
   database.query({
     'text': companyQuery,
