@@ -46,20 +46,16 @@ http.createServer(function(request, response) {
     args[key] = value;
   }
 
-  try {
-    // in a production enviornment I'd make this more object-oriented,
-    // and do some actual restriction of what you can call
-    // for the purposes of this example, going to make it easy :)
-    var fxn = require('./' + cls + '.js');
-    response.end(JSON.stringify(fxn(args)));
-  } catch (e) {
-    // my default response is to put a helpful message here
-    // since it wasn't specified, and there's no indicator for success/failure,
-    // this will be blank for now
-    console.log(e);
+  // since we only have 2, just whitelist
+  var whitelist = ['topActiveUsers', 'users'];
+  if (whitelist.indexOf(cls) !== -1) {
+    var processor = require('./' + cls + '.js');
+    processor(args, function(result) {
+      response.end(JSON.stringify(result));
+    });
+  } else {
     response.end();
   }
-
 }).listen(configuration.server.port);
 if (configuration.debug.log) {
   console.log('Server running on port ' + configuration.server.port);

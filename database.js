@@ -1,5 +1,7 @@
 
 
+var configuration = require('./configuration.js');
+
 var pg = require('pg');
 
 // postgres://username:password@host:port/database
@@ -13,14 +15,23 @@ var connectionString = (
 );
 
 
-// http://stackoverflow.com/a/19282657/5032228
 module.exports = {
-   query: function(text, values, callback) {
-      pg.connect(connectionString, function(err, client, done) {
-        client.query(text, values, function(err, result) {
-          done();
-          callback(err, result);
-        });
-      });
-   }
+  'query': function(query_statement, success_callback, error_callback) {
+    if (configuration.debug.log) {
+      console.log(query_statement);
+    }
+
+    var client = new pg.Client(connectionString);
+    client.connect();
+    client.on('drain', client.end.bind(client));
+
+    var query = client.query(query_statement, function(error, result) {
+      if (error) {
+        error_callback(error);
+        return;
+      }
+      success_callback(result.rows);
+    });
+  }
 };
+
