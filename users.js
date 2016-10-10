@@ -2,11 +2,27 @@
 
 var configuration = require('./configuration.js');
 
+
+/**
+ * Get information about a single user
+ *
+ * Spec:
+ * Takes user id and returns:
+ * user info;
+ * connected companies;
+ * listings created by the user;
+ * applications the user has made with the info of the listing the application is made to.
+ *
+ * @param {Object} args
+ * @param {Function} done
+ * @return {void}
+ */
 module.exports = function(args, done) {
   var id = args.id;
 
   var database = require('./database.js');
 
+  // init user object
   var user = {
     'id': null,
     'name': null,
@@ -16,6 +32,8 @@ module.exports = function(args, done) {
     'applications': null
   };
 
+  // check that all secondary queries have returned
+  // if they have, return the complete user object
   var maybe_done = function() {
     if (
       user.id &&
